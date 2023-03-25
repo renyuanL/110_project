@@ -288,14 +288,14 @@ def withkey():
         pygame.display.update()
 
 def new_word():
-	global chosenWord, pressedWord, word_X, word_Y, text, pointCaption, speed,label
-	word_X=random.randint(100,500)
-	word_Y=0
-	speed +=0.003
-	pressedWord=""
-	lines=open("ele/words.txt").read().splitlines()
-	chosenWord=random.choice(lines)
-	text =font.render(chosenWord, True, blue)
+    global chosenWord, pressedWord, word_X, word_Y, text, pointCaption, speed,label
+    word_X=random.randint(100,500)
+    word_Y=0
+    speed +=0.003
+    pressedWord=""
+    lines=open("ele/words.txt").read().splitlines()
+    chosenWord=random.choice(lines)
+    text =font.render(chosenWord, True, blue)
 
 win=pygame.display.set_mode((X,Y))
 pygame.display.set_caption("Apple CATCHER")
@@ -307,38 +307,38 @@ def withinput():
     global chosenWord, pressedWord, word_X, word_Y, text, pointCaption, speed,label,point
     running=True
     while running:
-	    win.fill((0, 0, 0))
-	    win.blit(background, (0, 0))
-	    word_Y+=speed
-	    win.blit(text,(word_X, word_Y))
-	    label = font.render(pressedWord, 1, (255,0,0))
-	    win.blit(label, (350, 500))
-	    for event in pygame.event.get():
-		    if event.type==pygame.QUIT:
-			    running = False
-		    elif event.type ==pygame.KEYDOWN:
-			    pressedWord +=pygame.key.name(event.key)
-			    label = font.render(pressedWord, 1, (255,0,0))
-			    #win.blit(label, (350, 500))
-			    if chosenWord.startswith(pressedWord):
-				    if chosenWord==pressedWord:
-					    point+= len(chosenWord)
-					    new_word()
-			    else:
-				    win.blit(label, (350, 500))
-				    pressedWord=""
+        win.fill((0, 0, 0))
+        win.blit(background, (0, 0))
+        word_Y+=speed
+        win.blit(text,(word_X, word_Y))
+        label = font.render(pressedWord, 1, (255,0,0))
+        win.blit(label, (350, 500))
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                running = False
+            elif event.type ==pygame.KEYDOWN:
+                pressedWord +=pygame.key.name(event.key)
+                label = font.render(pressedWord, 1, (255,0,0))
+                #win.blit(label, (350, 500))
+                if chosenWord.startswith(pressedWord):
+                    if chosenWord==pressedWord:
+                        point+= len(chosenWord)
+                        new_word()
+                else:
+                    win.blit(label, (350, 500))
+                    pressedWord=""
 
-	    pointCaption=font.render(str(point), True, green)
-	    win.blit(pointCaption, (10,5))
-	
-	    if word_Y<Y-5:
-		    pygame.display.update()
-	    else:
-		    event=pygame.event.wait()
-		    if event.type ==pygame.KEYDOWN and event.key ==pygame.K_SPACE:
-			    speed=0.03
-			    point=0
-			    new_word()
+        pointCaption=font.render(str(point), True, green)
+        win.blit(pointCaption, (10,5))
+    
+        if word_Y<Y-5:
+            pygame.display.update()
+        else:
+            event=pygame.event.wait()
+            if event.type ==pygame.KEYDOWN and event.key ==pygame.K_SPACE:
+                speed=0.03
+                point=0
+                new_word()
 
 import pygame.time as pgTime
 
@@ -507,24 +507,24 @@ def fire_bullet(x, y):
     win.blit(bulletImg, (x + 16, y + 10))
 
 def ck_history(word):
-	global ttl_history
-	if len(history)==10:
-		history[0]=history[1]
-		history[1]=history[2]
-		history[2]=history[3]
-		history[3]=history[4]
-		history[4]=history[5]
-		history[5]=history[6]
-		history[6]=history[7]
-		history[7]=history[8]
-		history[8]=history[9]
-		history[9]=word
-		ttl_history=" "
-		for i in range(len(history)):
-			ttl_history += history[i]+" "
-	else:
-		history.append(word)
-		ttl_history += word +" "
+    global ttl_history
+    if len(history)==10:
+        history[0]=history[1]
+        history[1]=history[2]
+        history[2]=history[3]
+        history[3]=history[4]
+        history[4]=history[5]
+        history[5]=history[6]
+        history[6]=history[7]
+        history[7]=history[8]
+        history[8]=history[9]
+        history[9]=word
+        ttl_history=" "
+        for i in range(len(history)):
+            ttl_history += history[i]+" "
+    else:
+        history.append(word)
+        ttl_history += word +" "
 
 def ryShow_recognition(x, y, recResult= None):
     
@@ -542,16 +542,16 @@ def upload_sound():
         shutil.rmtree('./upload_sound/'+os.path.basename(file_path))
 
     if file_path != '':
-	    shutil.copytree(file_path, './upload_sound/'+os.path.basename(file_path))
-	    tk.messagebox.showinfo('成功','上傳成功')
+        shutil.copytree(file_path, './upload_sound/'+os.path.basename(file_path))
+        tk.messagebox.showinfo('成功','上傳成功')
 
 def download_sound():
     root = tk.Tk()
     root.withdraw()
     file_path = filedialog.askopenfilename(initialdir=r".\download_sound")
     if file_path != '':
-	    shutil.copy(file_path, '.')
-	    tk.messagebox.showinfo('成功','下載成功')
+        shutil.copy(file_path, '.')
+        tk.messagebox.showinfo('成功','下載成功')
 
 main_menu()
         
